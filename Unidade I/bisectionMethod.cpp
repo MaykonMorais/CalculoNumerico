@@ -1,5 +1,6 @@
 #include<iostream>
 #include<math.h>
+#include <time.h>
 #define ZERO 0.0001
 
 using namespace std;
@@ -19,7 +20,6 @@ int main()
     cin>>b;
 
     cout<<"raiz: ";
-
     float root = findRoot(a,b);
     if(existBisection)
         cout<<"f("<<root<<")";
