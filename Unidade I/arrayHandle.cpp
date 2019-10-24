@@ -2,14 +2,14 @@
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>       /* time */
 #include <iostream>
-//using namespace std;
+using namespace std;
 
 void showMatriz(int lines, int columns, int** mat);
 void matrizGenerate(int lines, int columns, int** mat);
 void showVetor(int lines, int* vet);
 void vetorGenerate(int lines, int* vet);
-void showMatriz(int lines, int columns, double** mat);
-void matrizGenerate(int lines, int columns, double ** mat);
+void showMatriz(int lines, int columns, float** mat);
+void matrizGenerate(int lines, int columns, float ** mat);
 
 void showVetor(int lines, int* vet)
 {
@@ -57,26 +57,34 @@ void matrizGenerate(int lines, int columns, int ** mat)
     
 }
 
-void showMatriz(int lines, int columns, double** mat)
+void showMatriz(int lines, int columns, float** mat)
 {
     for (size_t i = 0; i < lines; i++)
     {
         for (size_t j = 0; j < columns; j++)
         {
-            printf("[%.2lf] ",mat[i][j]);
+            cout.setf(std::ios::fixed,std::ios::floatfield);
+            cout.precision(2);
+            float num = mat[i][j];
+            if (num<0.0001 && num>-0.0001)
+            {
+                num =  0;
+            }
+            
+            cout<<'['<<num<<"]\t";
         }
         printf("\n");       
     }    
 }
 
-void matrizGenerate(int lines, int columns, double ** mat)
+void matrizGenerate(int lines, int columns, float ** mat)
 {
     srand(time(NULL));
     for (size_t i = 0; i < lines; i++)
     {
         for (size_t j = 0; j < columns; j++)
         {
-            double num =  rand()%10;
+            float num =  rand()%10;
             mat[i][j] = num;
         }
         
