@@ -7,6 +7,7 @@ using namespace std;
 void showMatriz(int lines, int columns, int** matriz);
 void matrizGenerate(int lines, int columns, int** matriz);
 void showVetor(int lines, int* vet);
+void showVetor(int lines, float* vet);
 void vetorGenerate(int lines, int* vet);
 void showMatriz(int lines, int columns, float** matriz);
 void matrizGenerate(int lines, int columns, float ** matriz);
@@ -28,7 +29,22 @@ void showVetor(int lines, int* vet)
         printf("[%d] ",vet[i]);        
     }    
 }
-
+void showVetor(int lines, float* vet)
+{
+    int i;
+    for ( i = 0; i < lines; i++)
+    {
+        cout.setf(std::ios::fixed,std::ios::floatfield);
+        cout.precision(3);
+        float num = vet[i];
+        if (num<0.0001 && num>-0.0001)
+        {
+            num =  0;
+        }
+        cout<<'['<<num<<"]\t";
+        printf("\n");       
+    }    
+}
 void vetorGenerate(int lines, int* vet)
 {
     int i;
@@ -73,14 +89,14 @@ void showMatriz(int lines, int columns, float** matriz)
         for (int j = 0; j < columns; j++)
         {
             cout.setf(std::ios::fixed,std::ios::floatfield);
-            cout.precision(2);
+            cout.precision(3);
             float num = matriz[i][j];
             if (num<0.0001 && num>-0.0001)
             {
                 num =  0;
             }
             
-            cout<<'['<<num<<"]\t";
+            cout<<'['<<num<<"]";
         }
         printf("\n");       
     }    
@@ -127,12 +143,11 @@ float ** upperTriangular(int lines, int columns, float ** matriz,bool * statusEr
         }
         if (!*statusErro)
         {
-            operation1(j,columns,matrizUpper,1/matrizUpper[j][j]); //transforma o elemento da pivotacao em 1
             for (int i = j+1; i < lines; i++)
             {
                 if (matrizUpper[i][j]!=0)
                 {
-                    operation3(i,j,columns,matrizUpper,-matrizUpper[i][j]); //o elementos abaixo do elemento da pivotacao deve ser 0
+                    operation3(i,j,columns,matrizUpper,-matrizUpper[i][j]/matrizUpper[j][j]); //o elementos abaixo do elemento da pivotacao deve ser 0
                 }
             }
         }
@@ -174,12 +189,11 @@ float ** lowerTriangular(int lines, int columns, float ** matriz,bool * statusEr
         }
         if (!* statusErro)
         {
-            operation1(j,columns,matrizLower,1/matrizLower[j][j]); //transforma o elemento da pivotacao em 1
             for (int i = j-1; i >=0; i-=1)
             {
                 if (matrizLower[i][j]!=0)
                 {               
-                    operation3(i,j,columns,matrizLower,-matrizLower[i][j]); //o elementos acima do elemento da pivotacao deve ser 0
+                    operation3(i,j,columns,matrizLower,-matrizLower[i][j]/matrizLower[j][j]); //o elementos acima do elemento da pivotacao deve ser 0
                 }
             }
         }

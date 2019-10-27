@@ -10,7 +10,7 @@ int main()
     cout<<"Digite a ordem da matriz: ";
     cin>>SIZE;
     bool statusErro = false;
-    float ** matriz, ** matrizUpper, ** matrizLower;
+    float ** matriz, ** matrizUpper;
     matriz = new float*[SIZE];
     for (int i = 0; i < SIZE; i++)
     {
@@ -46,20 +46,22 @@ int main()
     if (!statusErro)
     {
         showMatriz(SIZE,SIZE+1,matrizUpper); //exibe a matriz final
+        cout<<"A*x = b\n";
+        float * x = new float[SIZE];
+        for (int i = SIZE-1; i >= 0; i--)
+        {
+            x[i] = matrizUpper[i][SIZE];
+            for (int j = i+1; j < SIZE; j++)
+            {
+                x[i] -= matrizUpper[i][j]*x[j];
+            }
+            x[i] /= matrizUpper[i][i];         
+        } 
+        cout<<"x =\n";
+        showVetor(SIZE,x);
     }
     else
     {
         cout<<"Essa matriz nao pode ser triangular superior";
     }
-    
-    cout<<"\nMatriz Triangular Inferior:\n";
-    matrizLower = lowerTriangular(SIZE,SIZE+1,matriz,&statusErro);
-    if (!statusErro)
-    {
-        showMatriz(SIZE,SIZE+1,matrizLower); //exibe a matriz final 
-    }
-    else
-    {
-        cout<<"Essa matriz nao pode ser triangular superior";
-    }  
 }
