@@ -9,6 +9,7 @@ void matrizGenerate(int lines, int columns, int** matriz);
 void showVetor(int lines, int* vet);
 void showVetor(int lines, float* vet);
 void vetorGenerate(int lines, int* vet);
+void vetorGenerate(int lines, float* vet);
 void showMatriz(int lines, int columns, float** matriz);
 void matrizGenerate(int lines, int columns, float ** matriz);
 
@@ -46,6 +47,17 @@ void showVetor(int lines, float* vet)
     }    
 }
 void vetorGenerate(int lines, int* vet)
+{
+    int i;
+    srand(time(NULL));
+    for ( i = 0; i < lines; i++)
+    {
+        vet[i] = rand()%10;        
+    }
+    
+}
+
+void vetorGenerate(int lines, float* vet)
 {
     int i;
     srand(time(NULL));
