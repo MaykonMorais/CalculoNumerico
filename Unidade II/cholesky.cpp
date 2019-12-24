@@ -1,4 +1,5 @@
 #include<iostream>
+#include<math.h>
 #include"arrayHandle.cpp"
 using namespace std;
 
@@ -10,11 +11,16 @@ int main()
     cout<<"Digite a ordem da matriz: ";
     cin>>SIZE;
     bool statusErro = false;
-    float ** matriz, ** matrizUpper;
+    float ** matriz, ** matrizL;
     matriz = new float*[SIZE];
     for (int i = 0; i < SIZE; i++)
     {
         matriz[i] = new float[SIZE+1];
+    }
+    matrizL = new float*[SIZE];
+    for (int i = 0; i < SIZE; i++)
+    {
+        matrizL[i] = new float[SIZE+1];
     }
     char Choice;
 
@@ -41,15 +47,12 @@ int main()
     showMatriz(SIZE,SIZE+1,matriz);
 
     //triangularizacao
-    cout<<"\nMatriz Triangular Superior:\n";
-    matrizUpper = upperTriangular(SIZE,SIZE+1,matriz,&statusErro);
-    statusErro = !isSymmetric(SIZE,SIZE,matriz);
-    float num = determinant(SIZE, SIZE, matriz, &statusErro);
-    cout<<num<<endl;
+    statusErro = !isPositiveDefinite(SIZE,matriz);
     if (!statusErro)
     {
-        
-        cout<<"A matriz eh simetrica";
+        cout<<"A matriz L:\n";
+        matrizL[0][0] = sqrt(matriz[0][0]);
+        showMatriz(SIZE,SIZE,matrizL);
         // showMatriz(SIZE,SIZE+1,matrizUpper); //exibe a matriz final
         // float * x = new float[SIZE];
         // for (int i = SIZE-1; i >= 0; i--)
@@ -64,8 +67,7 @@ int main()
         // for (size_t i = 0; i < SIZE; i++)
         // {
         //     cout<<"x"<<i+1<<" = "<<x[i]<<endl; 
-        // }
-        
+        // } 
     }
     else
     {

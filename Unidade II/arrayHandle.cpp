@@ -21,8 +21,9 @@ void operation2(int linesChange1,int linesChange2, int columns, float ** matriz)
 void operation3(int linesChange1,int linesChange2, int columns, float ** matriz, float numMult);
 
 void arrayCopy(int lines, int columns, float ** src,float ** target);
-bool isSymmetric(int lines, int columns, float ** matriz);
-float determinant(int lines, int columns, float ** matriz, bool * statusErro);
+float determinant(int size, float ** matriz, bool * statusErro);
+bool isSymmetric(int size, float ** matriz);
+bool isPositiveDefinite(int size, float ** matriz);
 void showVetor(int lines, int* vet)
 {
     int i;
@@ -276,13 +277,33 @@ void arrayCopy(int lines, int columns, float ** src,float ** target)
 }
 
 //---------------------------------------FIM------------------------------------------------------------------
+float determinant(int size, float ** matriz, bool * statusErro)
+{
+    float num = 1;
+    float ** matTriangular = new float *[size];
+    for (int i = 0; i < size; i++)
+    {
+        matTriangular[i] = new float[size];
+    }
+    bool st = false;
+    matTriangular = upperTriangular(size,size,matriz, &st);
+    if (!st)
+    {
+        for(int i = 0; i < size; i++)
+        {
+            num *= matTriangular[i][i];
+        }    
+    }
+    *statusErro = st;
+    return num;
+}
 
-bool isSymmetric(int lines, int columns, float ** matriz)
+bool isSymmetric(int size, float ** matriz)
 {
     bool symmetric = true;
-    for (int i = 0; i < lines; i++)
+    for (int i = 0; i < size; i++)
     {
-        for (int j = 0; j < columns; j++)
+        for (int j = 0; j < size; j++)
         {
             if(matriz[i][j] != matriz[j][i])
                 symmetric = false;
@@ -291,22 +312,16 @@ bool isSymmetric(int lines, int columns, float ** matriz)
     }
     return symmetric;
 }
-
-float determinant(int lines, int columns, float ** matriz, bool * statusErro)
+bool isPositiveDefinite(int size, float ** matriz)
 {
-    float num = 1;
-    float ** matTriangular = new float *[lines];
-    for (int i = 0; i < lines; i++)
+    bool control = isSymmetric(size,matriz);
+    for (int i = 0; (i <= size && control); i++)
     {
-        matTriangular[i] = new float[columns];
-    }
-    matTriangular = upperTriangular(lines,columns,matriz, statusErro);
-    if (!statusErro)
-    {
-        for(int i = 0; i < lines; i++)
+        bool st = false;
+        if(determinant(i,matriz,&st)<=0 || st)
         {
-            num *= matTriangular[i][i];
-        }    
-    }
-    return num;
+            control=false;
+        }
+    }  
+    return control;
 }
