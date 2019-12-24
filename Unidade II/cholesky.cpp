@@ -43,27 +43,32 @@ int main()
     //triangularizacao
     cout<<"\nMatriz Triangular Superior:\n";
     matrizUpper = upperTriangular(SIZE,SIZE+1,matriz,&statusErro);
+    statusErro = !isSymmetric(SIZE,SIZE,matriz);
+    float num = determinant(SIZE, SIZE, matriz, &statusErro);
+    cout<<num<<endl;
     if (!statusErro)
     {
-        showMatriz(SIZE,SIZE+1,matrizUpper); //exibe a matriz final
-        float * x = new float[SIZE];
-        for (int i = SIZE-1; i >= 0; i--)
-        {
-            x[i] = matrizUpper[i][SIZE];
-            for (int j = i+1; j < SIZE; j++)
-            {
-                x[i] -= matrizUpper[i][j]*x[j];
-            }
-            x[i] /= matrizUpper[i][i];        
-        }
-        for (size_t i = 0; i < SIZE; i++)
-        {
-            cout<<"x"<<i+1<<" = "<<x[i]<<endl; 
-        }
+        
+        cout<<"A matriz eh simetrica";
+        // showMatriz(SIZE,SIZE+1,matrizUpper); //exibe a matriz final
+        // float * x = new float[SIZE];
+        // for (int i = SIZE-1; i >= 0; i--)
+        // {
+        //     x[i] = matrizUpper[i][SIZE];
+        //     for (int j = i+1; j < SIZE; j++)
+        //     {
+        //         x[i] -= matrizUpper[i][j]*x[j];
+        //     }
+        //     x[i] /= matrizUpper[i][i];        
+        // }
+        // for (size_t i = 0; i < SIZE; i++)
+        // {
+        //     cout<<"x"<<i+1<<" = "<<x[i]<<endl; 
+        // }
         
     }
     else
     {
-        cout<<"nao eh possivel usar cholesky com essa matriz";
+        cout<<"Nao eh possivel usar cholesky com essa matriz";
     } 
 }

@@ -12,7 +12,6 @@ void vetorGenerate(int lines, int* vet);
 void vetorGenerate(int lines, float* vet);
 void showMatriz(int lines, int columns, float** matriz);
 void matrizGenerate(int lines, int columns, float ** matriz);
-bool isSymmetric(int lines, int columns, float ** matriz);
 
 float ** upperTriangular(int lines, int columns, float ** matriz,bool * statusErro);
 float ** lowerTriangular(int lines, int columns, float ** matriz,bool * statusErro);
@@ -22,7 +21,8 @@ void operation2(int linesChange1,int linesChange2, int columns, float ** matriz)
 void operation3(int linesChange1,int linesChange2, int columns, float ** matriz, float numMult);
 
 void arrayCopy(int lines, int columns, float ** src,float ** target);
-
+bool isSymmetric(int lines, int columns, float ** matriz);
+float determinant(int lines, int columns, float ** matriz, bool * statusErro);
 void showVetor(int lines, int* vet)
 {
     int i;
@@ -174,7 +174,7 @@ float ** upperTriangular(int lines, int columns, float ** matriz,bool * statusEr
         return NULL;
     }
 }
-float ** lowerTriangular(int lines, int columns, float ** matriz,bool * statusErro)
+float ** lowerTriangular(int lines, int columns, float ** matriz, bool * statusErro)
 {
     float ** matrizLower = new float*[lines];
     for (int i = 0; i < lines; i++)
@@ -290,4 +290,23 @@ bool isSymmetric(int lines, int columns, float ** matriz)
         i++;
     }
     return symmetric;
+}
+
+float determinant(int lines, int columns, float ** matriz, bool * statusErro)
+{
+    float num = 1;
+    float ** matTriangular = new float *[lines];
+    for (int i = 0; i < lines; i++)
+    {
+        matTriangular[i] = new float[columns];
+    }
+    matTriangular = upperTriangular(lines,columns,matriz, statusErro);
+    if (!statusErro)
+    {
+        for(int i = 0; i < lines; i++)
+        {
+            num *= matTriangular[i][i];
+        }    
+    }
+    return num;
 }
