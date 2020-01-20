@@ -47,10 +47,6 @@ def LDLt(A):
             L[j][i] = (A[i][j] - sum(D[k] * L[i][k] * L[j][k] for k in range(n - 1))) / D[i]
     return D, L
 
-
-# A = input("Enter Matrix A(n,n): ")
-# B = input("Enter matrix B(1,n): ")
-
 n = 3
 A = np.random.uniform(-1, 1, (n, n))
 A = A + A.T
