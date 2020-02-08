@@ -3,10 +3,10 @@
 using namespace std;
 
 double f(double x);
-double riemann (double x0, int divisions, double h);
+double riemann (double x0,double xf,int divisions);
 int main()
 {
-    double x0, xf, h;
+    double x0, xf;
     int divisions;
     cout<<"Digite um valor para x inicial: ";
     cin>>x0;
@@ -15,23 +15,25 @@ int main()
     cout<<"Digite o numero de divisoes: ";
     cin>>divisions;
 
-    h=(xf-x0)/divisions;
+    
 
-    cout<<"Integral por Riemann: "<<riemann(x0,divisions,h);
+    cout<<"Integral por Riemann: "<<riemann(x0,xf,divisions);
 }
 
 double f(double x)
 {
-    const double EULER = 2.71828182845904523536;
-    return  pow(EULER,x);
+    const double euler = 2.718281828;
+    return pow(euler,-pow(x,2));
+    // return pow(x,3) + 2;
 }
 
-double riemann (double x0,int divisions, double h)
+double riemann (double x0,double xf,int divisions)
 {
+    double h=(xf-x0)/divisions;
     double integral = 0;
     for (size_t i = 0; i < divisions; i++)
     {
-        integral += h* f(x0+h*i);
+        integral += abs(h* f(x0+h*i));
     }
     return integral;
 }
