@@ -30,7 +30,7 @@ double f(double x)
 double simpsonRepeated (double x0,double xf,int divisions)
 {
     double integral = 0;
-    double h = (xf-x0)/2*divisions;
+    double h = (xf-x0)/(2*divisions);
     double xP = x0;
     for (int i = 0; i < divisions; i++)
     {
