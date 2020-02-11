@@ -23,7 +23,7 @@ double f(double x)
 {
 
     const double euler = 2.718281828;
-    return pow(euler,-pow(x,2));
+    return pow(euler,2*x);
     // return pow(x,3) + 2;
 }
 

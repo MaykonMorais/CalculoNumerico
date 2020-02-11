@@ -22,8 +22,8 @@ int main()
 
 double f(double x)
 {
-    const double euler = 2.718281828;
-    return pow(euler,-pow(x,2));
+    const double euler = 2.718281828;\
+    // return pow(euler,-pow(x,2));
     // return pow(x,3) + 2;
 }
 
@@ -33,7 +33,7 @@ double riemann (double x0,double xf,int divisions)
     double integral = 0;
     for (size_t i = 0; i < divisions; i++)
     {
-        integral += abs(h* f(x0+h*i));
+        integral += (h* f(x0+h*i));
     }
     return integral;
 }

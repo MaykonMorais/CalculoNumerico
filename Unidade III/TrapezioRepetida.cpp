@@ -1,4 +1,4 @@
-/// REGRA DO TRAPÉZIO REPETIDA
+/// REGRA DO TRAPï¿½ZIO REPETIDA
 #include <iostream>
 #include <cmath> 
 using namespace std;
@@ -12,7 +12,7 @@ int main(){
 	int i, m;
 	double a, b, aux;
 	
-	cout << "---------REGRA DO TRAPÉZIO REPETIDA---------\n\n";
+	cout << "---------REGRA DO TRAPï¿½ZIO REPETIDA---------\n\n";
 	cout << "Digite o valor de a: ";
 	cin >> a;
 	cout << "Digite o valor de b: ";
@@ -20,7 +20,7 @@ int main(){
 	cout << "Digite o valor de m: " ;
 	cin >> m;
 
-	//condição para que o valor de b seja sempre o maior valor
+	//condiï¿½ï¿½o para que o valor de b seja sempre o maior valor
 	if(a>b)
 	{ 
 	    aux=a;
@@ -49,15 +49,17 @@ int main(){
 	
 	I = h * I;
 	
-	cout <<"\nA aproximação da integral numerica é: " << I << endl;
+	cout <<"\nA aproximaï¿½ï¿½o da integral numerica ï¿½: " << I << endl;
 		
 	return 0;
 }
 
-// definir a função
+// definir a funï¿½ï¿½o
 double funcao(double x)
 {
 	return(pow(E,x));
+
+    // return 3*x-7;
 }
 
 
